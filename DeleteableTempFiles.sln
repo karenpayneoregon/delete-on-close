@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1022
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DeleteFileOnClose", "DeleteFileOnCloseVisualBasic\DeleteFileOnClose.vbproj", "{E4E65BDC-F4BF-4ED9-9ED9-A254678EDCE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visual Basic", "Visual Basic", "{B7A1355A-6D1E-48D0-A927-0E294495EC21}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B9389F66-AA4E-4552-8DD4-95B61C5A3B18}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E4E65BDC-F4BF-4ED9-9ED9-A254678EDCE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4E65BDC-F4BF-4ED9-9ED9-A254678EDCE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4E65BDC-F4BF-4ED9-9ED9-A254678EDCE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4E65BDC-F4BF-4ED9-9ED9-A254678EDCE6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E4E65BDC-F4BF-4ED9-9ED9-A254678EDCE6} = {B7A1355A-6D1E-48D0-A927-0E294495EC21}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8075F11E-1CBF-4E02-A4C4-90E591815C20}
+	EndGlobalSection
+EndGlobal
