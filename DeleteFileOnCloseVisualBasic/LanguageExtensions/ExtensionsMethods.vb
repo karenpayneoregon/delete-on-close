@@ -5,13 +5,13 @@ Namespace LanguageExtensions
         ''' <summary>
         ''' Creates a file stream which will be removed from disk when the application closes
         ''' </summary>
-        ''' <param name="FileName"></param>
+        ''' <param name="fileName"></param>
         ''' <returns>FileStream marked for removal when app closes</returns>
         ''' <remarks></remarks>
-        Public Function FileStreamDeleteOnClose(FileName As String) As FileStream
+        Public Function FileStreamDeleteOnClose(fileName As String) As FileStream
 
             Dim fileStream As New FileStream(
-                FileName,
+                fileName,
                 FileMode.Create,
                 Security.AccessControl.FileSystemRights.Modify,
                 FileShare.None,
@@ -20,20 +20,26 @@ Namespace LanguageExtensions
 
             File.SetAttributes(
                 fileStream.Name,
-                File.GetAttributes(fileStream.Name) Or FileAttributes.Temporary)
+                File.GetAttributes(fileStream.Name) Or
+                FileAttributes.Temporary)
 
             Return fileStream
 
         End Function
         <DebuggerStepThrough()>
         <Runtime.CompilerServices.Extension()>
-        Public Function GenerateRandomXmlFile(sender As String, Length As Integer) As String
-            Return sender & GenerateRandomBaseName(Length) & ".XML"
+        Public Function GenerateRandomXmlFile(sender As String, length As Integer) As String
+            Return sender & GenerateRandomBaseName(length) & ".XML"
         End Function
         <DebuggerStepThrough()>
-        Private Function GenerateRandomBaseName(Length As Integer) As String
-            Dim rand As Random = New Random()
-            Return CStr(Enumerable.Range(0, Length).Select(Function(i) (Chr(Asc("A") + rand.Next(0, 26)))).ToArray)
+        Private Function GenerateRandomBaseName(length As Integer) As String
+
+            Dim rand = New Random()
+
+            Return CStr(Enumerable.Range(0, length).
+                Select(Function(index) (Chr(Asc("A") + rand.Next(0, 26)))).
+                ToArray)
+
         End Function
 
     End Module
