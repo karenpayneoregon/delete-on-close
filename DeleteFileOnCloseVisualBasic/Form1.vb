@@ -4,65 +4,47 @@ Imports DeleteFileOnClose.Classes
 Imports DeleteFileOnClose.LanguageExtensions
 
 Public Class Form1
-    Private test As FileStream
+    WithEvents fileOperations As New FileOperations
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub FirstTimePopulateFileButton_Click(sender As Object, e As EventArgs) Handles FirstTimePopulateFileButton.Click
+        fileOperations.PopulateTempFile()
+        FirstTimePopulateFileButton.Enabled = False
+    End Sub
 
-        Dim tempFileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "K1".GenerateRandomXmlFile(5))
-        Dim creator1 As FileStream = FileStreamDeleteOnClose(tempFileName)
+    Private Sub ExamineFileButton_Click(sender As Object, e As EventArgs) Handles ExamineFileButton.Click
+        MessageTextBox.Text = ""
+        fileOperations.ExamineCustomersFromXmlFile()
+    End Sub
 
-        Dim xmlData =
-        <?xml version="1.0" standalone="yes"?>
-        <Customers>
-            <Customer>
-                <CustomerID>ALFKI</CustomerID>
-                <CompanyName>Alfreds Futterkiste</CompanyName>
-            </Customer>
-            <Customer>
-                <CustomerID>ANATR</CustomerID>
-                <CompanyName>Ana Trujillo Emparedados y helados</CompanyName>
-            </Customer>
-            <Customer>
-                <CustomerID>BOLID</CustomerID>
-                <CompanyName>Bilido Comidas preparadas</CompanyName>
-            </Customer>
-            <Customer>
-                <CustomerID>CENTC</CustomerID>
-                <CompanyName>Centro comercial Moctezuma</CompanyName>
-            </Customer>
-        </Customers>
-
-        Dim byteArray As Byte() = Encoding.ASCII.GetBytes(xmlData.ToString)
-        creator1.Write(byteArray, 0, byteArray.Length)
-
-        Dim streamReader As StreamReader
-        streamReader = New StreamReader(creator1)
-        streamReader.BaseStream.Seek(0, IO.SeekOrigin.Begin)
-
-        Dim customerDataBuilder As New StringBuilder
-
-        While (streamReader.Peek > -1)
-            customerDataBuilder.Append(streamReader.ReadLine())
-        End While
-
-        Dim customers = (
-                From customer In XDocument.Parse(customerDataBuilder.ToString())...<Customer>
-                Select Name = customer.<CompanyName>.Value, Identifier = customer.<CustomerID>.Value
-                ).ToList
-
-        ' Show the customer we just read in
-        For Each customerItem In customers
-            Console.WriteLine($"ID=[{customerItem.Identifier}] Company [{ customerItem.Name}]")
-        Next
-
-        If File.Exists(tempFileName) Then
-            MessageBox.Show("File exists until closes or crashes")
+    Private Sub AddCustomerToFileButton_Click(sender As Object, e As EventArgs) Handles AddCustomerToFileButton.Click
+        If Not String.IsNullOrWhiteSpace(CustomerNameTextBox.Text) Then
+            MessageTextBox.Text = ""
+            fileOperations.AddNewCustomer(New Customer() With {.Name = CustomerNameTextBox.Text})
+        Else
+            MessageBox.Show("Requires a name")
         End If
+    End Sub
+
+    Private Sub AddPersonToFileButton_Click(sender As Object, e As EventArgs) Handles AddPersonToFileButton.Click
+
+        Dim people As New List(Of Person) From {
+                New Person() With {.FirstName = "Mary", .LastName = "Frank"},
+                New Person() With {.FirstName = "Jim", .LastName = "Gallagher"}
+                }
+
+        MessageTextBox.Text = ""
+        fileOperations.QuickUse(people)
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim operations As New FileOperations
-        operations.DoSomeWork1()
+    Private Sub fileOperations_PeekEventHandler(sender As Object, e As PeekArgs) Handles fileOperations.PeekEventHandler
+        MessageTextBox.AppendText($"{e.Message}{Environment.NewLine}")
     End Sub
+
+    Private Sub fileOperations_CustomersEventHandler(sender As Object, e As CustomerArgs) Handles fileOperations.CustomersEventHandler
+        For Each customer As Customer In e.Customers
+            MessageTextBox.AppendText($"{customer.Identifier}, {customer.Name}{Environment.NewLine}")
+        Next
+    End Sub
+
 End Class

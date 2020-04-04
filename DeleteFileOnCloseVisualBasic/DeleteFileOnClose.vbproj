@@ -73,7 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Customer.vb" />
+    <Compile Include="Classes\CustomerArgs.vb" />
+    <Compile Include="Modules\DelegatesModule.vb" />
     <Compile Include="Classes\FileOperations.vb" />
+    <Compile Include="Classes\PeekArgs.vb" />
+    <Compile Include="Classes\Person.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +127,5 @@
     </None>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
