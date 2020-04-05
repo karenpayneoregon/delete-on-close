@@ -68,7 +68,7 @@ Public Class Form1
 
     Private Sub CrashButton_Click(sender As Object, e As EventArgs) Handles CrashButton.Click
 
-        'fileOperations.Crash("Line one")
+        fileOperations.Crash("Line one")
 
         'For i As Integer = 0 To 3
         '    Console.WriteLine(TempFileHelper.CreateNewOutPutFile())

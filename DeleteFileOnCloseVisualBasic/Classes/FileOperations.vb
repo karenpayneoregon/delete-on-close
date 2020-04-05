@@ -113,25 +113,25 @@ Namespace Classes
         ''' </summary>
         Public Sub PopulateTempFile()
             Dim xmlData As XDocument =
-                    <?xml version="1.0" standalone="yes"?>
-                    <Customers>
-                        <Customer>
-                            <CustomerID>100</CustomerID>
-                            <CompanyName>Alfreds Futterkiste</CompanyName>
-                        </Customer>
-                        <Customer>
-                            <CustomerID>101</CustomerID>
-                            <CompanyName>Ana Trujillo Emparedados y helados</CompanyName>
-                        </Customer>
-                        <Customer>
-                            <CustomerID>102</CustomerID>
-                            <CompanyName>Bilido Comidas preparadas</CompanyName>
-                        </Customer>
-                        <Customer>
-                            <CustomerID>103</CustomerID>
-                            <CompanyName>Centro comercial Moctezuma</CompanyName>
-                        </Customer>
-                    </Customers>
+            <?xml version="1.0" standalone="yes"?>
+            <Customers>
+                <Customer>
+                    <CustomerID>100</CustomerID>
+                    <CompanyName>Alfreds Futterkiste</CompanyName>
+                </Customer>
+                <Customer>
+                    <CustomerID>101</CustomerID>
+                    <CompanyName>Ana Trujillo Emparedados y helados</CompanyName>
+                </Customer>
+                <Customer>
+                    <CustomerID>102</CustomerID>
+                    <CompanyName>Bilido Comidas preparadas</CompanyName>
+                </Customer>
+                <Customer>
+                    <CustomerID>103</CustomerID>
+                    <CompanyName>Centro comercial Moctezuma</CompanyName>
+                </Customer>
+            </Customers>
 
             Dim byteArray As Byte() = Encoding.ASCII.GetBytes(xmlData.ToString)
 

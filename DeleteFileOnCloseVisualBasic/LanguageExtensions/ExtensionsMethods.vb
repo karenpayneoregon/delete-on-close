@@ -20,7 +20,8 @@ Namespace LanguageExtensions
         End Function
 
         ''' <summary>
-        ''' Creates a file stream which will be removed from disk when the application closes
+        ''' Creates a file stream which will be removed from 
+        ''' disk when the application closes
         ''' </summary>
         ''' <param name="fileName"></param>
         ''' <returns>FileStream marked for removal when app closes</returns>
