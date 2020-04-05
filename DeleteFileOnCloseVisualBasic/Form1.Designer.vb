@@ -29,6 +29,8 @@ Partial Class Form1
         Me.MessageTextBox = New System.Windows.Forms.TextBox()
         Me.CustomerNameTextBox = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.FaileFastCheckBox = New System.Windows.Forms.CheckBox()
+        Me.CrashButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'FirstTimePopulateFileButton
@@ -69,7 +71,7 @@ Partial Class Form1
         '
         'MessageTextBox
         '
-        Me.MessageTextBox.Location = New System.Drawing.Point(12, 152)
+        Me.MessageTextBox.Location = New System.Drawing.Point(12, 213)
         Me.MessageTextBox.Multiline = True
         Me.MessageTextBox.Name = "MessageTextBox"
         Me.MessageTextBox.Size = New System.Drawing.Size(293, 205)
@@ -85,17 +87,38 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(9, 136)
+        Me.Label1.Location = New System.Drawing.Point(9, 197)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(68, 13)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "Event output"
         '
+        'FaileFastCheckBox
+        '
+        Me.FaileFastCheckBox.AutoSize = True
+        Me.FaileFastCheckBox.Location = New System.Drawing.Point(196, 105)
+        Me.FaileFastCheckBox.Name = "FaileFastCheckBox"
+        Me.FaileFastCheckBox.Size = New System.Drawing.Size(85, 17)
+        Me.FaileFastCheckBox.TabIndex = 8
+        Me.FaileFastCheckBox.Text = "Cause crash"
+        Me.FaileFastCheckBox.UseVisualStyleBackColor = True
+        '
+        'CrashButton
+        '
+        Me.CrashButton.Location = New System.Drawing.Point(12, 128)
+        Me.CrashButton.Name = "CrashButton"
+        Me.CrashButton.Size = New System.Drawing.Size(169, 23)
+        Me.CrashButton.TabIndex = 9
+        Me.CrashButton.Text = "Crash example"
+        Me.CrashButton.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(323, 371)
+        Me.ClientSize = New System.Drawing.Size(323, 430)
+        Me.Controls.Add(Me.CrashButton)
+        Me.Controls.Add(Me.FaileFastCheckBox)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.CustomerNameTextBox)
         Me.Controls.Add(Me.MessageTextBox)
@@ -119,4 +142,6 @@ Partial Class Form1
     Friend WithEvents MessageTextBox As TextBox
     Friend WithEvents CustomerNameTextBox As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents FaileFastCheckBox As CheckBox
+    Friend WithEvents CrashButton As Button
 End Class

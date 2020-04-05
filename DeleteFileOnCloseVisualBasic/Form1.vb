@@ -2,9 +2,12 @@
 Imports System.Text
 Imports DeleteFileOnClose.Classes
 Imports DeleteFileOnClose.LanguageExtensions
+Imports DeleteFileOnClose.Modules
 
 Public Class Form1
     WithEvents fileOperations As New FileOperations
+    Private crashFileName As String = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Crashed.txt")
+
 
     Private Sub FirstTimePopulateFileButton_Click(sender As Object, e As EventArgs) Handles FirstTimePopulateFileButton.Click
         fileOperations.PopulateTempFile()
@@ -33,7 +36,7 @@ Public Class Form1
                 }
 
         MessageTextBox.Text = ""
-        fileOperations.QuickUse(people)
+        fileOperations.QuickUse(people, FaileFastCheckBox.Checked)
 
     End Sub
 
@@ -47,4 +50,28 @@ Public Class Form1
         Next
     End Sub
 
+    Private Sub Form1_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+
+        If File.Exists(crashFileName) Then
+            MessageBox.Show("Cleaning up from crash")
+            File.Delete(crashFileName)
+        End If
+
+        If Debugger.IsAttached Then
+            '
+            ' Crash example works best outside the IDE
+            ' to get the full experience 
+            '
+            CrashButton.Enabled = False
+        End If
+    End Sub
+
+    Private Sub CrashButton_Click(sender As Object, e As EventArgs) Handles CrashButton.Click
+
+        fileOperations.Crash("Line one")
+
+        For i As Integer = 0 To 3
+            Console.WriteLine(TempFileHelper.CreateNewOutPutFile())
+        Next
+    End Sub
 End Class

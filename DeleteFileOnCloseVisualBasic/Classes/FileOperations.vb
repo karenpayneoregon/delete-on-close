@@ -21,9 +21,44 @@ Namespace Classes
                 AppDomain.CurrentDomain.BaseDirectory, "K1".GenerateRandomXmlFile(5)))
 
         End Sub
-        Public Sub QuickUse(peopleList As List(Of Person))
+        Public Sub Crash(line As String)
+            Dim fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Crashed.txt")
+
+            Try
+                Using fs As New FileStream(fileName, FileMode.OpenOrCreate, FileAccess.ReadWrite)
+                    Using fw As New StreamWriter(fs)
+                        fw.Write(line)
+                    End Using
+                End Using
+
+                Environment.FailFast(Nothing)
+
+                '
+                ' never get here
+                '
+                Dim crashVar = CInt(line)
+
+                File.Delete(fileName)
+
+            Catch ex As Exception
+                '
+                ' never get here
+                '
+                If File.Exists(fileName) Then
+                    File.Delete(fileName)
+                End If
+
+            End Try
+
+        End Sub
+        Public Sub QuickUse(peopleList As List(Of Person), Optional failFast As Boolean = False)
 
             Dim fileName = Path.GetTempFileName()
+
+            If failFast Then
+                Console.WriteLine(fileName)
+            End If
+
 
             RaiseEvent PeekEventHandler(Me, New PeekArgs($"Temporary file name: {fileName}"))
             RaiseEvent PeekEventHandler(Me, New PeekArgs(""))
@@ -41,6 +76,10 @@ Namespace Classes
                     ' Write each person comma delimited
                     '
                     For index As Integer = 0 To peopleList.Count - 1
+                        If index = 1 AndAlso failFast Then
+                            Console.WriteLine("Fail")
+                            Environment.FailFast(Nothing)
+                        End If
                         streamWriter.WriteLine($"{peopleList(index).FirstName},{peopleList(index).LastName}")
                     Next
 
