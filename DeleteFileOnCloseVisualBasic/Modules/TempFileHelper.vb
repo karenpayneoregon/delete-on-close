@@ -7,7 +7,7 @@ Namespace Modules
         ''' <summary>
         ''' Create temp file name
         ''' </summary>
-        ''' <param name="CreateNewFile">Physically create file</param>
+        ''' <param name="createNewFile">Physically create file</param>
         ''' <returns></returns>
         ''' <remarks>
         ''' Calling this method and create a file the next call will
@@ -15,9 +15,12 @@ Namespace Modules
         ''' this method passing false will not increment as there are
         ''' no files to determine a next number
         ''' </remarks>
-        Public Function CreateNewOutPutFile(Optional CreateNewFile As Boolean = True) As String
+        Public Function CreateNewOutPutFile(
+            Optional fileExtension As String = ".txt",
+            Optional createNewFile As Boolean = True) As String
+
             Dim removeLeft As String = Assembly.GetExecutingAssembly().GetName().Name
-            Const removeRight As String = ".txt"
+            Dim removeRight As String = fileExtension
             Dim searchString As String = removeLeft & "*" & removeRight
             Const numberSpecifier As String = "0000"
 
@@ -47,7 +50,7 @@ Namespace Modules
 
             fileName = $"{removeLeft }{maxTempIndex.ToString(numberSpecifier) }{removeRight }"
 
-            If CreateNewFile Then
+            If createNewFile Then
                 File.CreateText(fileName)
             End If
 

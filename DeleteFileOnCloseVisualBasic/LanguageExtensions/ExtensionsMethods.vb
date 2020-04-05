@@ -6,7 +6,7 @@ Namespace LanguageExtensions
         <DebuggerStepThrough()>
         <Extension()>
         Public Function GenerateRandomXmlFile(sender As String, length As Integer) As String
-            Return sender & GenerateRandomBaseName(length) & ".XML"
+            Return $"{sender}{GenerateRandomBaseName(length)}.XML"
         End Function
         <DebuggerStepThrough()>
         Private Function GenerateRandomBaseName(length As Integer) As String

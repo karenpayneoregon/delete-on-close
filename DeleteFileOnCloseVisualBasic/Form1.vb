@@ -62,16 +62,17 @@ Public Class Form1
             ' Crash example works best outside the IDE
             ' to get the full experience 
             '
-            CrashButton.Enabled = False
+            'CrashButton.Enabled = False
         End If
     End Sub
 
     Private Sub CrashButton_Click(sender As Object, e As EventArgs) Handles CrashButton.Click
 
-        fileOperations.Crash("Line one")
+        'fileOperations.Crash("Line one")
 
-        For i As Integer = 0 To 3
-            Console.WriteLine(TempFileHelper.CreateNewOutPutFile())
-        Next
+        'For i As Integer = 0 To 3
+        '    Console.WriteLine(TempFileHelper.CreateNewOutPutFile())
+        'Next
+
     End Sub
 End Class
